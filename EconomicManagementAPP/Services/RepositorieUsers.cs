@@ -23,10 +23,12 @@ namespace EconomicManagementAPP.Services
         public async Task Create(Users users)
         {
             using var connection = new SqlConnection(connectionString);
-            var id = await connection.QuerySingleAsync<int>($@"INSERT INTO Users
-                                                        (Email, StandarEmail,Password)
-                                                        VALUES(@Email, @StandarEmail, @Password); SELECT SCOPE_IDENTITY();",
-                                                                users);
+            var id = await connection.QuerySingleAsync<int>
+                ($@"INSERT INTO Users
+                    (Email, StandarEmail,Password)
+                        VALUES(@Email, @StandarEmail, @Password); 
+                            SELECT SCOPE_IDENTITY();",
+                            users);
             users.Id = id;
         }
 
@@ -78,8 +80,15 @@ namespace EconomicManagementAPP.Services
         public async Task<Users> Login(string email, string password)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<Users>(@"SELECT * FROM Users WHERE Email = @Email
-                                                            AND Password = @Password", new { email, password });
+            return await connection.QueryFirstOrDefaultAsync<Users>
+                (@"SELECT * FROM Users 
+                    WHERE Email = @Email
+                        AND Password = @Password",
+                        new
+                        {
+                            email,
+                            password
+                        });
         }
     }
 }

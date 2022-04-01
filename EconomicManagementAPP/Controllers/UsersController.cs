@@ -45,10 +45,7 @@ namespace EconomicManagementAPP.Controllers
                 ModelState.AddModelError(String.Empty, "Wrong Email or Password");
                 return View(loginViewModel);
             }
-            else
-            {
-                return RedirectToAction("Index", "AccountTypes");
-            }
+            return RedirectToAction("Index", "AccountTypes");
         }
 
         [HttpPost]
@@ -80,13 +77,9 @@ namespace EconomicManagementAPP.Controllers
         public async Task<ActionResult> Modify(int id)
         {
             var user = await repositorieUser.getAccountById(id);
-
-            if (user is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(user);
+            return user is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(user);
         }
 
         [HttpPost]
@@ -108,13 +101,9 @@ namespace EconomicManagementAPP.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var user = await repositorieUser.getAccountById(id);
-
-            if (user is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(user);
+            return user is null ? 
+                RedirectToAction("NotFound", "Home") : 
+                    View(user);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteUser(int id)

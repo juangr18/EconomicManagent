@@ -35,7 +35,7 @@ namespace EconomicManagementAPP.Controllers
                 return View(accountTypes);
             }
 
-            var userId = repositorieUsers.GetUserId();
+            accountTypes.UserId = repositorieUsers.GetUserId();
             accountTypes.OrderAccount = 1;
 
             // Validamos si ya existe antes de registrar
@@ -63,13 +63,9 @@ namespace EconomicManagementAPP.Controllers
             var userId = repositorieUsers.GetUserId();
             var accountTypeExist = await repositorieAccountTypes.Exist(Name, userId);
 
-            if (accountTypeExist)
-            {
-                // permite acciones directas entre front y back
-                return Json($"The account {Name} already exist");
-            }
-
-            return Json(true);
+            // permite acciones directas entre front y back
+            return accountTypeExist ?
+                Json($"The account {Name} already exist") : Json(true);
         }
 
         //Actualizar
@@ -78,13 +74,9 @@ namespace EconomicManagementAPP.Controllers
         {
             var userId = repositorieUsers.GetUserId();
             var accountType = await repositorieAccountTypes.getAccountById(id, userId);
-
-            if (accountType is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(accountType);
+            return accountType is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(accountType);
         }
         [HttpPost]
         public async Task<ActionResult> Modify(AccountTypes accountTypes)
@@ -106,13 +98,9 @@ namespace EconomicManagementAPP.Controllers
         {
             var userId = repositorieUsers.GetUserId();
             var account = await repositorieAccountTypes.getAccountById(id, userId);
-
-            if (account is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(account);
+            return account is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(account);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteAccount(int id)

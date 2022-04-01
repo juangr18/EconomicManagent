@@ -19,8 +19,9 @@ namespace EconomicManagementAPP.Services
         {
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>(@"INSERT INTO Categories
-                                                        (Name, OperationTypeId, UserId)
-                                                        VALUES(@Name, @OperationTypeId, @UserId); SELECT SCOPE_IDENTITY();",
+                                                            (Name, OperationTypeId, UserId)
+                                                            VALUES(@Name, @OperationTypeId, @UserId); 
+                                                                SELECT SCOPE_IDENTITY();",
                                                                 categories);
             categories.Id = id;
         }
@@ -28,7 +29,7 @@ namespace EconomicManagementAPP.Services
         public async Task Delete(int id)
         {
             using var connection = new SqlConnection(connectionString);
-            await connection.ExecuteAsync(@"Categorie_Delete", 
+            await connection.ExecuteAsync(@"Categorie_Delete",
                 new { id },
                 commandType: System.Data.CommandType.StoredProcedure);
         }
@@ -57,13 +58,22 @@ namespace EconomicManagementAPP.Services
         public async Task<IEnumerable<Categories>> GetCategories(int userId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Categories>(@"SELECT * FROM Categories WHERE UserId = @userId", new { userId });
+            return await connection.QueryAsync<Categories>(@"SELECT * FROM Categories 
+                                                            WHERE UserId = @userId",
+                                                            new { userId });
         }
 
         public async Task<IEnumerable<Categories>> GetCategories(int userId, OperationTypes operationTypesId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Categories>(@"SELECT * FROM Categories WHERE UserId = @userId AND OperationTypeId = @operationTypesId", new { userId, operationTypesId });
+            return await connection.QueryAsync<Categories>(@"SELECT * FROM Categories 
+                                                            WHERE UserId = @userId AND 
+                                                                  OperationTypeId = @operationTypesId",
+                                                            new
+                                                            {
+                                                                userId,
+                                                                operationTypesId
+                                                            });
         }
 
         public async Task Modify(Categories categories)

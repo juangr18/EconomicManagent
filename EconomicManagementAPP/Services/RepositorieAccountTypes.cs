@@ -17,9 +17,12 @@ namespace EconomicManagementAPP.Services
         {
             using var connection = new SqlConnection(connectionString);
             // Requiere el await - tambien requiere el Async al final de la query
-            var id = await connection.QuerySingleAsync<int>($@"INSERT INTO AccountTypes
-                                                (Name, UserId, OrderAccount)
-                                                VALUES (@Name, @UserId, @OrderAccount); SELECT SCOPE_IDENTITY();", accountTypes);
+            var id = await connection.QuerySingleAsync<int>
+                    ($@"INSERT INTO AccountTypes
+                        (Name, UserId, OrderAccount)
+                         VALUES (@Name, @UserId, @OrderAccount); 
+                            SELECT SCOPE_IDENTITY();",
+                            accountTypes);
             accountTypes.Id = id;
         }
 
@@ -32,7 +35,11 @@ namespace EconomicManagementAPP.Services
                                     @"SELECT 1
                                     FROM AccountTypes
                                     WHERE Name = @Name AND UserId = @UserId;",
-                                    new { Name, UserId });
+                                    new
+                                    {
+                                        Name,
+                                        UserId
+                                    });
             return exist == 1;
         }
 
@@ -43,7 +50,8 @@ namespace EconomicManagementAPP.Services
             return await connection.QueryAsync<AccountTypes>(@"SELECT Id, Name, OrderAccount
                                                             FROM AccountTypes
                                                             WHERE UserId = @UserId
-                                                            ORDER BY OrderAccount", new { UserId });
+                                                            ORDER BY OrderAccount",
+                                                            new { UserId });
         }
 
         // Actualizar
@@ -52,7 +60,8 @@ namespace EconomicManagementAPP.Services
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(@"UPDATE AccountTypes
                                             SET Name = @Name
-                                            WHERE Id = @Id", accountTypes);
+                                            WHERE Id = @Id",
+                                            accountTypes);
         }
 
         //Para actualizar se necesita obtener el tipo de cuenta por el id
@@ -63,14 +72,19 @@ namespace EconomicManagementAPP.Services
                                                                 SELECT Id, Name, UserId, OrderAccount
                                                                 FROM AccountTypes
                                                                 WHERE Id = @Id AND UserID = @UserID",
-                                                                new { id, userId });
+                                                                new
+                                                                {
+                                                                    id,
+                                                                    userId
+                                                                });
         }
 
         //Eliminar
         public async Task Delete(int id)
         {
             using var connection = new SqlConnection(connectionString);
-            await connection.ExecuteAsync("DELETE AccountTypes WHERE Id = @Id", new { id });
+            await connection.ExecuteAsync("DELETE AccountTypes WHERE Id = @Id",
+                                           new { id });
         }
     }
 }

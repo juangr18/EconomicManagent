@@ -28,8 +28,6 @@ namespace EconomicManagementAPP.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            // var userId = repositorieUsers.GetUserId();
-            // var accountType = await repositorieAccountTypes.
             return View();
         }
 
@@ -56,11 +54,9 @@ namespace EconomicManagementAPP.Controllers
         {
             var userId = repositorieUsers.GetUserId();
             var account = await repositorieAccounts.GetAccountById(Id, userId);
-            if (account is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-            return View(account);
+            return account is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(account);
         }
 
         [HttpPost]
@@ -82,11 +78,9 @@ namespace EconomicManagementAPP.Controllers
 
             var userId = repositorieUsers.GetUserId();
             var account = await repositorieAccounts.GetAccountById(Id, userId);
-            if (account is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-            return View(account);
+            return account is null ?
+            RedirectToAction("NotFound", "Home") :
+                View(account);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteAccount(int Id)

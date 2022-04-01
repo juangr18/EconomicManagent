@@ -53,7 +53,8 @@ namespace EconomicManagementAPP.Services
                 FROM Accounts
                 INNER JOIN AccountTypes at
                 ON at.Id = Accounts.AccountTypeId
-                WHERE at.UserId = @userId AND Accounts.Id = @id;", new { id, userId });
+                WHERE at.UserId = @userId AND Accounts.Id = @id;",
+                new { id, userId });
         }
 
         public async Task Modify(Accounts accounts)
@@ -78,7 +79,8 @@ namespace EconomicManagementAPP.Services
                                   INNER JOIN AccountTypes at
                                   ON at.Id = Accounts.AccountTypeId
                                   WHERE at.UserId = @UserId
-                                  ORDER BY at.OrderAccount", new { userId });
+                                  ORDER BY at.OrderAccount", 
+                                  new { userId });
         }
     }
 }

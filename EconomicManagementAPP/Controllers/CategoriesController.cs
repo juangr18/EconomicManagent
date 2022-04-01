@@ -57,12 +57,9 @@ namespace EconomicManagementAPP.Controllers
             var userId = repositorieUsers.GetUserId();
             var categorie = await repositorieCategories.GetCategorieById(id, userId);
 
-            if (categorie is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(categorie);
+            return categorie is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(categorie);
         }
 
         [HttpPost]
@@ -92,13 +89,9 @@ namespace EconomicManagementAPP.Controllers
         {
             var userId = repositorieUsers.GetUserId();
             var categories = await repositorieCategories.GetCategorieById(id, userId);
-
-            if (categories is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(categories);
+            return categories is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(categories);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteCategorie(int id)
