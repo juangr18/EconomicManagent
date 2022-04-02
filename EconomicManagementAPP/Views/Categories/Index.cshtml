@@ -4,9 +4,17 @@
     ViewData["Title"] = "Categories";
 }
 
-<h1>Categories</h1>
-<h5>Categories help us see what we spend our money on, also where our income comes from.</h5>
-<a asp-action="Create" class="btn btn-primary mb-3">Create category</a>
+<div>
+    <h1>Categories</h1>
+</div>
+<div class="d-flex justify-content-between">
+    <div>
+        <h5>Categories help us see what we spend our money on, also where our income comes from.</h5>
+    </div>
+    <div>
+        <a asp-action="Create" class="btn btn-success mb-3">Create category</a>
+    </div>
+</div>
 
 @if (Model.Any())
 {

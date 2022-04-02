@@ -75,15 +75,9 @@ namespace EconomicManagementAPP.Controllers
                 return View(model);
             }
             var account = await repositorieAccounts.GetAccountById(model.AccountId, userId);
-
-            if (account is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
             var category = await repositorieCategories.GetCategorieById(model.CategoryId, userId);
 
-            if (category is null)
+            if (account is null || category is null)
             {
                 return RedirectToAction("NotFound", "Home");
             }
@@ -138,19 +132,12 @@ namespace EconomicManagementAPP.Controllers
             }
 
             var account = await repositorieAccounts.GetAccountById(model.AccountId, userId);
-
-            if (account is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
             var category = await repositorieCategories.GetCategorieById(model.CategoryId, userId);
 
-            if (category is null)
+            if (account is null || category is null)
             {
                 return RedirectToAction("NotFound", "Home");
             }
-
             var transaction = mapper.Map<Transactions>(model);
 
             model.PreviousTotal = model.Total;
@@ -170,18 +157,14 @@ namespace EconomicManagementAPP.Controllers
             var userId = repositorieUsers.GetUserId();
             var transaction = await repositorieTransactions.GetTransactionById(id, userId);
 
-            if (transaction is null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-
-            return View(transaction);
+            return transaction is null ?
+                RedirectToAction("NotFound", "Home") :
+                    View(transaction);
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteTransaction(int id)
         {
-
             var userId = repositorieUsers.GetUserId();
             var transaction = await repositorieTransactions.GetTransactionById(id, userId);
 
