@@ -7,11 +7,11 @@ namespace EconomicManagementAPP.Controllers
     public class AccountsController : Controller
     {
         private IRepositorieAccounts repositorieAccounts;
-        private IRepositorieUsers repositorieUsers;
+        private RepositorieUsers repositorieUsers;
         private IRepositorieAccountTypes repositorieAccountTypes;
 
         public AccountsController(IRepositorieAccounts repositorieAccounts,
-                                  IRepositorieUsers repositorieUsers,
+                                  RepositorieUsers repositorieUsers,
                                   IRepositorieAccountTypes repositorieAccountTypes)
         {
             this.repositorieAccounts = repositorieAccounts;

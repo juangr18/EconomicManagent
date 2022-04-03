@@ -1,7 +1,7 @@
 
 using EconomicManagementAPP.Models;
 
-public interface IRepositorieUsers
+public interface RepositorieUsers
 {
     Task Create(Users users);
 

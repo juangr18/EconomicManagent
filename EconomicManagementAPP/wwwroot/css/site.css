@@ -25,5 +25,12 @@ body {
 .containerFooter {
     color: #ffffff;
 }
+div .logo{
+    display:inline-block;
+} 
+.imgLogo{
+    width:20%;
+    height:20%;
+}
 
  

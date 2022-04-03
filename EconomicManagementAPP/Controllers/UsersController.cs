@@ -6,9 +6,9 @@ namespace EconomicManagementAPP.Controllers
     public class UsersController : Controller
     {
 
-        private readonly IRepositorieUsers repositorieUser;
+        private readonly RepositorieUsers repositorieUser;
 
-        public UsersController(IRepositorieUsers repositorieUser)
+        public UsersController(RepositorieUsers repositorieUser)
         {
             this.repositorieUser = repositorieUser;
         }
