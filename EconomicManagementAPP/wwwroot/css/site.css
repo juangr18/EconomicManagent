@@ -25,12 +25,13 @@ body {
 .containerFooter {
     color: #ffffff;
 }
-div .logo{
-    display:inline-block;
-} 
-.imgLogo{
-    width:20%;
-    height:20%;
-}
 
+.imgLogo {
+    width: 28%;
+    height: 28%;
+}
+.git{
+    width:2%;
+    height:2%;
+}
  
