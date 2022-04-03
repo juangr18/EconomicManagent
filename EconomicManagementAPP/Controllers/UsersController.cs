@@ -7,6 +7,7 @@ namespace EconomicManagementAPP.Controllers
     {
 
         private readonly RepositorieUsers repositorieUser;
+        public static Users IsSignIn;
 
         public UsersController(RepositorieUsers repositorieUser)
         {
@@ -45,6 +46,7 @@ namespace EconomicManagementAPP.Controllers
                 ModelState.AddModelError(String.Empty, "Wrong Email or Password");
                 return View(loginViewModel);
             }
+            IsSignIn = result;
             return RedirectToAction("Index", "AccountTypes");
         }
 
@@ -69,6 +71,7 @@ namespace EconomicManagementAPP.Controllers
                 return View(users);
             }
             await repositorieUser.Create(users);
+            IsSignIn = users;
             return RedirectToAction("Index");
         }
 
@@ -117,6 +120,10 @@ namespace EconomicManagementAPP.Controllers
 
             await repositorieUser.Delete(id);
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Logout(){
+            IsSignIn = null;
+            return RedirectToAction("Login");
         }
     }
 }

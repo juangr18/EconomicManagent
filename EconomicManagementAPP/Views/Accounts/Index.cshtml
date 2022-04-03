@@ -5,13 +5,18 @@
 <div>
     <h1>Accounts</h1>
 </div>
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-between">
+    <div>
+        <h5>Here you can review your account, add, create and delete.</h5>
+    </div>
+    <div>
     <a asp-action="Create" class="btn btn-success mb-3">Create account</a>
+    </div>
 </div>
 
 @if (Model.Any())
 {
-    <table class="table">
+    <table class="table table-hover">
         <thead class="table-secondary">
             <tr>
                 <th>Actions</th>
