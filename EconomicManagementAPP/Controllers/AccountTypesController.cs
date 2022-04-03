@@ -6,9 +6,9 @@ namespace EconomicManagementAPP.Controllers
     public class AccountTypesController : Controller
     {
         private readonly IRepositorieAccountTypes repositorieAccountTypes;
-        private readonly RepositorieUsers repositorieUsers;
+        private readonly IRepositorieUsers repositorieUsers;
 
-        public AccountTypesController(IRepositorieAccountTypes repositorieAccountTypes, RepositorieUsers repositorieUsers)
+        public AccountTypesController(IRepositorieAccountTypes repositorieAccountTypes, IRepositorieUsers repositorieUsers)
         {
             this.repositorieAccountTypes = repositorieAccountTypes;
             this.repositorieUsers = repositorieUsers;

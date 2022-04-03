@@ -8,13 +8,13 @@ namespace EconomicManagementAPP.Controllers
 {
     public class TransactionsController : Controller
     {
-        private readonly RepositorieUsers repositorieUsers;
+        private readonly IRepositorieUsers repositorieUsers;
         private readonly IRepositorieAccounts repositorieAccounts;
         private readonly IRepositorieTransactions repositorieTransactions;
         private readonly IRepositorieCategories repositorieCategories;
         private readonly IMapper mapper;
 
-        public TransactionsController(RepositorieUsers repositorieUsers,
+        public TransactionsController(IRepositorieUsers repositorieUsers,
                                       IRepositorieAccounts repositorieAccounts,
                                       IRepositorieCategories repositorieCategories,
                                       IRepositorieTransactions repositorieTransactions,

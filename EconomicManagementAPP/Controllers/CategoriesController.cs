@@ -7,9 +7,9 @@ namespace EconomicManagementAPP.Controllers
     {
 
         private readonly IRepositorieCategories repositorieCategories;
-        private readonly RepositorieUsers repositorieUsers;
+        private readonly IRepositorieUsers repositorieUsers;
 
-        public CategoriesController(RepositorieUsers repositorieUsers, IRepositorieCategories repositorieCategories)
+        public CategoriesController(IRepositorieUsers repositorieUsers, IRepositorieCategories repositorieCategories)
         {
             this.repositorieCategories = repositorieCategories;
             this.repositorieUsers = repositorieUsers;
