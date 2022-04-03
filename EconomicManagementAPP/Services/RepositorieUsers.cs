@@ -5,11 +5,11 @@ using Microsoft.Data.SqlClient;
 namespace EconomicManagementAPP.Services
 {
 
-    public class IRepositorieUsers : RepositorieUsers
+    public class RepositorieUsers : IRepositorieUsers
     {
         private readonly string connectionString;
 
-        public IRepositorieUsers(IConfiguration configuration)
+        public RepositorieUsers(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
